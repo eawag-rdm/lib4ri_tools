@@ -1,11 +1,13 @@
 <html>
   <head>
     <script src="static/lib4ri.js"></script>
-    <script>window.addEventListener("DOMContentLoaded", lib4riPage);</script>
+    <script>window.addEventListener("DOMContentLoaded", lib4riProcessPage);</script>
     <script>
-      var institutes = get_object_from_flaskparam('{{ institutes }}');
-      var files = get_object_from_flaskparam('{{ files }}');
-      var institute = get_object_from_flaskparam('{{ institute }}');
+      var success = get_object_from_flaskparam('{{ success }}');
+      var filename = get_object_from_flaskparam('{{ filename }}');
+      var nexturl = get_object_from_flaskparam('{{ nexturl }}');
+      var stdout = get_object_from_flaskparam('{{ stdout }}');
+      var stderr = get_object_from_flaskparam('{{ stderr }}');
       var errormsgs = []
       {%- with messages = get_flashed_messages() -%}
       {%-   if messages -%}

@@ -1,11 +1,11 @@
 <html>
   <head>
     <script src="static/lib4ri.js"></script>
-    <script>window.addEventListener("DOMContentLoaded", lib4riPage);</script>
+    <script>window.addEventListener("DOMContentLoaded", lib4riTokenErrorPage);</script>
     <script>
-      var institutes = get_object_from_flaskparam('{{ institutes }}');
-      var files = get_object_from_flaskparam('{{ files }}');
-      var institute = get_object_from_flaskparam('{{ institute }}');
+      var oldtoken = get_object_from_flaskparam('{{ oldtoken }}');
+      var newtoken = get_object_from_flaskparam('{{ newtoken }}');
+      var expires = get_object_from_flaskparam('{{ expires }}');
       var errormsgs = []
       {%- with messages = get_flashed_messages() -%}
       {%-   if messages -%}
