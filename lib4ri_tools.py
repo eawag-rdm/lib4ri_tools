@@ -508,7 +508,6 @@ def main():
       institutes = jsonize_nested_odicts(institutes),
       files      = jsonize_nested_odicts(files),
       institute  = jsonize_nested_odicts(selected_institute),
-      token      = jsonize_nested_odicts(activetoken),
     )
 
 @app.route("/upload", methods=['GET', 'POST'])
