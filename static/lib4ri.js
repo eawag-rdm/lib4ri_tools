@@ -30,7 +30,7 @@ function lib4riPage() {
   // attach the upload selector
   var form1 = document.createElement("form");
   form1.setAttribute("enctype", "multipart/form-data");
-  form1.setAttribute("action", "/upload");
+  form1.setAttribute("action", docroot + "/upload");
   form1.setAttribute("method", "post");
   document.body.appendChild(form1);
 
@@ -107,7 +107,7 @@ function lib4riPage() {
           submit = confirm("Are you sure you selected the correct file?\n(I expected '" + this.name + "', but you want to upload '" + this.value + "')")
         }
         if (submit) {
-          form1.setAttribute("action", "/upload");
+          form1.setAttribute("action", docroot + "/upload");
           form1.submit();
         }
       };
@@ -150,7 +150,7 @@ function lib4riPage() {
     var process = document.createElement("button")
     process.innerHTML = "Process..."
     process.onclick = function() {
-      form1.setAttribute("action", "/process");
+      form1.setAttribute("action", docroot + "/process");
       form1.submit();
     }
     if (processable) {
@@ -204,7 +204,7 @@ function lib4riTokenErrorPage() {
   // attach the reset-form
   var form2 = document.createElement("form");
   form2.setAttribute("enctype", "multipart/form-data");
-  form2.setAttribute("action", "/"); // do nothing by default
+  form2.setAttribute("action", docroot + "/"); // do nothing by default
   form2.setAttribute("method", "post");
   if (showform) {
     document.body.appendChild(form2);
@@ -226,7 +226,7 @@ function lib4riTokenErrorPage() {
   button.innerHTML = "Reset server";
   button.onclick = function() {
     if (confirm("Are you sure you want to disable the other user?")) {
-      form2.setAttribute("action", "/reset");
+      form2.setAttribute("action", docroot + "/reset");
       form2.submit();
     }
   };
@@ -313,7 +313,7 @@ function lib4riProcessPage() {
   // attach the retrieve-form
   var form3 = document.createElement("form");
   form3.setAttribute("enctype", "multipart/form-data");
-  form3.setAttribute("action", "/"); // do nothing by default
+  form3.setAttribute("action", docroot + "/"); // do nothing by default
   form3.setAttribute("method", "post");
 
   var filenameinput = document.createElement("input");
@@ -333,7 +333,7 @@ function lib4riProcessPage() {
     window.setTimeout(function(){
 			window.location = nexturl;
 		      }, 3000);
-    form3.setAttribute("action", "/retrieve");
+    form3.setAttribute("action", docroot + "/retrieve");
     form3.submit();
   };
   form3.appendChild(button);

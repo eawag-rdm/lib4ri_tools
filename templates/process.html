@@ -3,6 +3,7 @@
     <script src="static/lib4ri.js"></script>
     <script>window.addEventListener("DOMContentLoaded", lib4riProcessPage);</script>
     <script>
+      var docroot = get_object_from_flaskparam('{{ docroot }}');
       var success = get_object_from_flaskparam('{{ success }}');
       var filename = get_object_from_flaskparam('{{ filename }}');
       var nexturl = get_object_from_flaskparam('{{ nexturl }}');

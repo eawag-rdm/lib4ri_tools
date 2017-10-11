@@ -14,7 +14,32 @@ SCRIPT = 'lib4ritest.sh' # This is supposed to be a wrapper-script. It will be c
 
 async_mode = 'eventlet'
 
+# make the reverse-proxy wrapper for path configurability
+# (see, e.g., http://flask.pocoo.org/snippets/35/)
+class ReverseProxied(object):
+    def __init__(self, app):
+        self.app = app
+    def __call__(self, environ, start_response):
+        script_name = environ.get('HTTP_X_SCRIPT_NAME', '')
+        if script_name:
+            environ['SCRIPT_NAME'] = script_name
+            app.config['APPLICATION_ROOT'] = environ.get('SCRIPT_NAME') # probably needed for cookies
+            path_info = environ['PATH_INFO']
+            if path_info.startswith(script_name):
+                environ['PATH_INFO'] = path_info[len(script_name):]
+            else:
+                start_response('404', [('Content-Type', 'text/html')])
+                return ["Please start <a href='".encode() + script_name.encode() + "'>here</a>.".encode()]
+        server = environ.get('HTTP_X_FORWARDED_SERVER', '')
+        if server:
+            environ['HTTP_HOST'] = server
+        scheme = environ.get('HTTP_X_SCHEME', '')
+        if scheme:
+            environ['wsgi.url_scheme'] = scheme
+        return self.app(environ, start_response)
+
 app = Flask(__name__)
+app.wsgi_app = ReverseProxied(app.wsgi_app)
 app.secret_key = 'extremely_secure_random_secret_key' # @TODO: put an actual random key here...
 
 isotimefmt = "%Y-%m-%dT%H:%M:%SZ"
@@ -436,10 +461,21 @@ def session_handler(): # returns True if starting a new session, or False if ano
     activatesession(token)
     return True
 
+# retrieve the document root (w/out servername and w/out trailing slash)
+def get_docroot():
+    root = "/"
+    try:
+        root = request.environ['SCRIPT_NAME']
+    except KeyError:
+        pass
+    root = sub("/$", "", root) # remove trailing slash
+    return root
+
 # render the page that says that another session is active
 def render_occupied():
     sessiontoken, sessiontime = get_session_info()
     return render_template('tokenerror.html',
+      docroot  = jsonize_nested_odicts(get_docroot()),
       oldtoken = jsonize_nested_odicts(activetoken),
       newtoken = jsonize_nested_odicts(sessiontoken),
       expires  = jsonize_nested_odicts(strftime(isotimefmt, gmtime(activetime + expiration))),
@@ -468,6 +504,7 @@ def main():
         selected_institute = request.form['institute']
     update_files_times()
     return render_template('index.html',
+      docroot    = jsonize_nested_odicts(get_docroot()),
       institutes = jsonize_nested_odicts(institutes),
       files      = jsonize_nested_odicts(files),
       institute  = jsonize_nested_odicts(selected_institute),
@@ -551,6 +588,7 @@ def process():
         cp = run([join('.', SCRIPT), relpath(get_target_file(), start=process_folder)], stdout=PIPE, stderr=PIPE, cwd=process_folder)
         recursive_rmdir(process_folder)
         return render_template('process.html',
+          docroot  = jsonize_nested_odicts(get_docroot()),
           success  = jsonize_nested_odicts(True),
           filename = jsonize_nested_odicts(return_filename),
           nexturl  = jsonize_nested_odicts(url_for('main')),

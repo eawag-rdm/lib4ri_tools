@@ -3,6 +3,7 @@
     <script src="static/lib4ri.js"></script>
     <script>window.addEventListener("DOMContentLoaded", lib4riTokenErrorPage);</script>
     <script>
+      var docroot = get_object_from_flaskparam('{{ docroot }}');
       var oldtoken = get_object_from_flaskparam('{{ oldtoken }}');
       var newtoken = get_object_from_flaskparam('{{ newtoken }}');
       var expires = get_object_from_flaskparam('{{ expires }}');
