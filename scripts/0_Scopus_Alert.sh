@@ -86,7 +86,7 @@ mv scopus.zip $mypath/files_to_upload
 cd $mypath
 rmdir zipfiles/
 rmdir xmls/
-echo -e "Process successfully completed! The zip files can be found in the folder files_to_upload. Please read the output.txt file for furhter remarks." > /dev/tty
+echo -e "Process successfully completed! The zip files can be found in the folder files_to_upload. Please read the output.txt file for further remarks." > /dev/tty
 exit
 ################################################################################################
 
