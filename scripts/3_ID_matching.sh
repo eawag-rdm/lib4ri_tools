@@ -117,7 +117,8 @@ AuthorsNoC=$(( AuthorsNo + 1 ))										# number of authors is equal to the num
 		sed -i -e 's|,,,,,,,,,|,,,,|g' Authors.csv
 		DepartName0=`grep -w -i "Empa" Authors.csv`						# check if the publications are Empa or Eawag to do correct substitution below
 		DepartName01=`grep -w -i "Eawag" Authors.csv`
-			if [[ "$DepartName0" ]];
+		DepartName02=`grep -w -i "WSL" Authors.csv`
+                        if [[ "$DepartName0" ]];
 			then
 			sed -i -e 's|,,,,|000 Empa"|g' Authors.csv				        # all authors that have no department in DORA are set to the Lib4RI department
 			standartDepID=empa-units\:56
@@ -128,6 +129,12 @@ AuthorsNoC=$(( AuthorsNo + 1 ))										# number of authors is equal to the num
 			sed -i -e 's|,,,,|Eawag"|g' Authors.csv	
 			standartDepID=eawag-units\:34
 			standartDepName=Eawag			        
+		        fi
+			if [[ "$DepartName02" ]];
+			then
+			sed -i -e 's|,,,,|WSL"|g' Authors.csv	
+			standartDepID=wsl-units\:1
+			standartDepName=WSL			        
 			fi		
 		grep -m1 "$Authortogrep.*" Authors.csv > tmp9.txt 					# grep only the first match - to avoid getting more matches, but it may match the wrong author!
 		Authormatch=`grep -w -i "$Authortogrep.*" Authors.csv`
