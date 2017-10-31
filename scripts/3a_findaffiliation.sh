@@ -12,6 +12,7 @@ cd $mypath/xmls
 
 grep -i "Empa" tmp8.txt > tmpa.txt
 grep -i "Eawag" tmp8.txt > tmpb.txt
+grep -i "WSL" tmp8.txt > tmpbb.txt
 grep -i "Eidgenössische Materialprüfungs- und Forschungsanstalt" tmp8.txt > tmpc.txt
 grep -i "Swiss Federal Laboratories for Materials Science and Technology" tmp8.txt > tmpd.txt
 grep -i "Swiss Federal Laboratories for Materials Testing and Research" tmp8.txt > tmpe.txt
@@ -29,8 +30,9 @@ grep -i "Eidgenössische Anstalt für Wasserversorgung, Abwasserreinigung und Ge
 grep -i "Eidgenossische Anst. F. Wasserversorgung, Abwasserreinigung und Gewasserschutz" tmp8.txt > tmpq.txt
 grep -i "Kastanienbaum" tmp8.txt > tmpr.txt
 grep -i "Swiss Federal Institute of Aquatic Research" tmp8.txt > tmps.txt
+grep -i "Swiss Federal Institute of Forest, Snow and Landscape" tmp8.txt > tmpt.txt
 
 
-cat tmpa.txt tmpb.txt tmpc.txt tmpd.txt tmpe.txt tmpf.txt tmpg.txt tmph.txt tmpi.txt tmpg.txt tmpk.txt tmpl.txt tmpm.txt tmpn.txt tmpo.txt tmpp.txt tmpq.txt tmpr.txt tmps.txt> tmpall.txt
+cat tmpa.txt tmpb.txt tmpbb.txt tmpc.txt tmpd.txt tmpe.txt tmpf.txt tmpg.txt tmph.txt tmpi.txt tmpg.txt tmpk.txt tmpl.txt tmpm.txt tmpn.txt tmpo.txt tmpp.txt tmpq.txt tmpr.txt tmps.txt tmpt.txt> tmpall.txt
 ################################################################################################
 
