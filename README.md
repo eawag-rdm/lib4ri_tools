@@ -62,4 +62,4 @@ When all the files are uploaded, the user can press "Process..." to execute the 
 Note: If a concurrent request is performed, the new user is blocked in order to avoid overwriting of the files that need processing. After a certain amount of time the original user makes no request to the server (currently five minutes), the new user has the possibility to press "Reset server" in order to make his or her own session active (the original user is subsequently denied access).
 
 <br/><br/><br/>
-> _This document is Copyright &copy; 2017 by Harald von Waldow (Eawag), d-r-p (Lib4RI) and licensed under [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0/)._
+> _This document is Copyright &copy; 2017 by d-r-p (Lib4RI) and licensed under [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0/)._
